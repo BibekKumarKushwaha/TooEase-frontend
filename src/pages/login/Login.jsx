@@ -1,11 +1,10 @@
+
 // import React, { useState } from "react";
 // import { toast } from 'react-toastify';
 // import { useNavigate } from 'react-router-dom';
 // import { loginUserApi } from "../../apis/Api";
 // import NavbarSwitch from '../../components/NavbarSwitch';
 // import './Login.css'; 
-// import { useNavigate } from "react-router-dom";
-
 
 // const Login = () => {
 //     const [email, setEmail] = useState('');
@@ -13,6 +12,8 @@
 //     const [emailError, setEmailError] = useState('');
 //     const [passwordError, setPasswordError] = useState('');
 //     const navigate = useNavigate();
+
+//     // Validation function
 //     const validation = () => {
 //         let isValid = true;
 //         if (email.trim() === '' || !email.includes('@')) {
@@ -24,7 +25,9 @@
 //             isValid = false;
 //         }
 //         return isValid;
-//     }
+//     };
+
+//     // Handle Login
 //     const handleLogin = async (e) => {
 //         e.preventDefault();
 //         if (!validation()) {
@@ -33,7 +36,7 @@
 //         const data = {
 //             "email": email,
 //             "password": password
-//         }
+//         };
 //         try {
 //             const res = await loginUserApi(data);
 //             if (res.data.success === false) {
@@ -43,11 +46,11 @@
 //                 localStorage.setItem('token', res.data.token);
 //                 const convertedData = JSON.stringify(res.data.userData);
 //                 localStorage.setItem('user', convertedData);
-//               if(res.data.userData.isAdmin){
-//                 window.location.href = '/admindashboard';
-//               }else{
-//                 window.location.href = '/dashboard';
-//               }
+//                 if(res.data.userData.isAdmin){
+//                     window.location.href = '/admindashboard';
+//                 } else {
+//                     window.location.href = '/dashboard';
+//                 }
 //             }
 //         } catch (error) {
 //             if (error.response && error.response.status === 400) {
@@ -56,11 +59,17 @@
 //                 toast.error("An unexpected error occurred. Please try again later.");
 //             }
 //         }
-//     }
+//     };
 
+//     // Handle Create Account
 //     const handleCreateAccount = () => {
 //         navigate('/register');
-//     }
+//     };
+
+//     // Handle Forgot Password Link Click
+//     const handleForgotPasswordClick = () => {
+//         navigate('/forgot_password'); // Navigate to forgot-password page
+//     };
 
 //     return (
 //         <>
@@ -85,13 +94,20 @@
 //                             className="input-field"
 //                             placeholder="Password"
 //                         />
-//                         {passwordError && <p class="error-msg">{passwordError}</p>}
+//                         {passwordError && <p className="error-msg">{passwordError}</p>}
 //                         <div className="form-actions">
 //                             <div className="remember-me">
 //                                 <input type="checkbox" id="rememberMe" />
 //                                 <label htmlFor="rememberMe">Remember Me</label>
 //                             </div>
-//                             <button type="button" className="forgot-password" onClick={() => navigate('/forgot_password')}>Forgot Password?</button>
+//                             {/* Forgot Password Link */}
+//                             <button
+//                                 type="button"
+//                                 className="forgot-password"
+//                                 onClick={handleForgotPasswordClick} // Trigger navigation to Forgot Password page
+//                             >
+//                                 Forgot Password?
+//                             </button>
 //                         </div>
 //                         <button onClick={handleLogin} className="login-btn">Login Now</button>
 //                         <button type="button" onClick={handleCreateAccount} className="create-account-btn">Create Account</button>
@@ -111,13 +127,14 @@
 //             </div>
 //         </>
 //     );
-// }
-// export default Login;
+// };
 
+// export default Login;
 
 import React, { useState } from "react";
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { loginUserApi } from "../../apis/Api";
 import NavbarSwitch from '../../components/NavbarSwitch';
 import './Login.css'; 
@@ -127,6 +144,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    const [captchaToken, setCaptchaToken] = useState(null); // Captcha token state
     const navigate = useNavigate();
 
     // Validation function
@@ -135,9 +153,17 @@ const Login = () => {
         if (email.trim() === '' || !email.includes('@')) {
             setEmailError("Email is empty or invalid");
             isValid = false;
+        } else {
+            setEmailError('');
         }
         if (password.trim() === '') {
             setPasswordError("Password is empty");
+            isValid = false;
+        } else {
+            setPasswordError('');
+        }
+        if (!captchaToken) {
+            toast.error("Captcha validation is required!");
             isValid = false;
         }
         return isValid;
@@ -150,8 +176,9 @@ const Login = () => {
             return;
         }
         const data = {
-            "email": email,
-            "password": password
+            email,
+            password,
+            captchaToken, // Include captcha token in the request
         };
         try {
             const res = await loginUserApi(data);
@@ -162,7 +189,7 @@ const Login = () => {
                 localStorage.setItem('token', res.data.token);
                 const convertedData = JSON.stringify(res.data.userData);
                 localStorage.setItem('user', convertedData);
-                if(res.data.userData.isAdmin){
+                if (res.data.userData.isAdmin) {
                     window.location.href = '/admindashboard';
                 } else {
                     window.location.href = '/dashboard';
@@ -177,6 +204,11 @@ const Login = () => {
         }
     };
 
+    // Handle Captcha Change
+    const handleCaptchaChange = (token) => {
+        setCaptchaToken(token);
+    };
+
     // Handle Create Account
     const handleCreateAccount = () => {
         navigate('/register');
@@ -184,7 +216,7 @@ const Login = () => {
 
     // Handle Forgot Password Link Click
     const handleForgotPasswordClick = () => {
-        navigate('/forgot-password'); // Navigate to forgot-password page
+        navigate('/forgot_password');
     };
 
     return (
@@ -198,29 +230,39 @@ const Login = () => {
                         <label>Email Address</label>
                         <input
                             onChange={(e) => setEmail(e.target.value)}
+                            value={email}
                             type="text"
                             className="input-field"
                             placeholder="Email Address"
                         />
                         {emailError && <p className="error-msg">{emailError}</p>}
+                        
                         <label>Password</label>
                         <input
                             onChange={(e) => setPassword(e.target.value)}
+                            value={password}
                             type="password"
                             className="input-field"
                             placeholder="Password"
                         />
                         {passwordError && <p className="error-msg">{passwordError}</p>}
+
+                        <div className="captcha-container">
+                            <ReCAPTCHA
+                                sitekey="6LcZbb8qAAAAAK1Ik3xs59Lny8erLjrEzgeBttrd" // Your site key
+                                onChange={handleCaptchaChange}
+                            />
+                        </div>
+
                         <div className="form-actions">
                             <div className="remember-me">
                                 <input type="checkbox" id="rememberMe" />
                                 <label htmlFor="rememberMe">Remember Me</label>
                             </div>
-                            {/* Forgot Password Link */}
                             <button
                                 type="button"
                                 className="forgot-password"
-                                onClick={handleForgotPasswordClick} // Trigger navigation to Forgot Password page
+                                onClick={handleForgotPasswordClick}
                             >
                                 Forgot Password?
                             </button>
@@ -246,3 +288,4 @@ const Login = () => {
 };
 
 export default Login;
+
