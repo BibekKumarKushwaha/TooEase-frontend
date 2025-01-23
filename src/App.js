@@ -6,7 +6,6 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
-
 import Homepage from './pages/homepage/Homepage';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
