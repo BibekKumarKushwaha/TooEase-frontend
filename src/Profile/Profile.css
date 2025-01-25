@@ -126,4 +126,35 @@ body, html {
     text-align: center;
     border-top: 1px solid #ddd;
   }
+  .password-strength-bar {
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+  
+  .password-strength-fill {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    transition: width 0.3s ease;
+  }
+  
+  .password-strength-fill.weak {
+    background-color: red;
+  }
+  
+  .password-strength-fill.strong {
+    background-color: orange;
+  }
+  
+  .password-strength-fill.very-strong {
+    background-color: green;
+  }
   
