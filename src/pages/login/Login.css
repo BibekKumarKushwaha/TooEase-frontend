@@ -111,3 +111,33 @@
   height: auto;
   border-radius: 8px;
 }
+.notification {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.lock-message {
+  background-color: #fff3cd; /* Light yellow background */
+  color: #856404; /* Dark yellow text */
+  padding: 10px;
+  border: 1px solid #ffeeba;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.attempts-message {
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.error-msg {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 5px;
+}
