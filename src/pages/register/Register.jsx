@@ -446,7 +446,7 @@ const Register = () => {
 
     if (!firstName.trim()) errors.firstName = 'First name is required!';
     if (!lastName.trim()) errors.lastName = 'Last name is required!';
-    if (!email.trim() || !email.includes('@')) errors.email = 'A valid email is required!';
+    if (!email.trim() || !email.includes('@','.com')) errors.email = 'A valid email is required!';
     if (!phone.trim() || phone.length < 10) errors.phone = 'A valid phone number is required!';
     if (!password.trim()) {
       errors.password = 'Password is required!';
