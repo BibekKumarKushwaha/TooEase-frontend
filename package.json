@@ -10,6 +10,7 @@
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.3",
     "framer-motion": "^11.3.21",
+    "https": "^1.0.0",
     "jsonwebtoken": "^9.0.2",
     "khalti-checkout-web": "^2.2.0",
     "mockito": "^1.0.7",
@@ -26,7 +27,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set HTTPS=true&&set SSL_CRT_FILE=server.crt&&set SSL_KEY_FILE=server.key&&react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
     "eject": "react-scripts eject"
