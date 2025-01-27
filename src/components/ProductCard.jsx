@@ -143,7 +143,7 @@ const ProductCard = ({ productInformation, viewMode, color }) => {
   const cardContent = (
     <>
       <ProductImage
-        src={`http://localhost:5000/products/${productInformation.productImage}`}
+        src={`https://localhost:5000/products/${productInformation.productImage}`}
         alt={productInformation.productName}
         preview={false}
         onClick={handleShow}
@@ -184,7 +184,7 @@ const ProductCard = ({ productInformation, viewMode, color }) => {
           {productInformation.productCategory}
         </span>
         <img
-          src={`http://localhost:5000/products/${productInformation.productImage}`}
+          src={`https://localhost:5000/products/${productInformation.productImage}`}
           className="card-img-top"
           alt="Product"
           style={{ height: '12rem', objectFit: 'cover' }}
@@ -256,7 +256,7 @@ const ProductCard = ({ productInformation, viewMode, color }) => {
         ]}
       >
         <Image
-          src={`http://localhost:5000/products/${productInformation.productImage}`}
+          src={`https://localhost:5000/products/${productInformation.productImage}`}
           alt={productInformation.productName}
           style={{ width: "100%", marginBottom: "16px" }}
         />
@@ -279,7 +279,7 @@ const ProductCard = ({ productInformation, viewMode, color }) => {
       >
         <div style={{ display: "flex", marginBottom: "16px" }}>
           <Image
-            src={`http://localhost:5000/products/${productInformation.productImage}`}
+            src={`https://localhost:5000/products/${productInformation.productImage}`}
             alt={productInformation.productName}
             style={{ width: "100px", height: "100px", marginRight: "16px" }}
           />
