@@ -143,12 +143,12 @@ const Favourites = () => {
               >
                 <Image
                   width={150}
-                  src={`http://localhost:5000/products/${item.productId.productImage}`}
+                  src={`https://localhost:5000/products/${item.productId.productImage}`}
                   alt={item.productName}
                   preview={{
-                    src: `http://localhost:5000/products/${item.productId.productImage}`,
+                    src: `https://localhost:5000/products/${item.productId.productImage}`,
                   }}
-                />
+                />  
                 <ItemDetails>
                   <ItemName>{item.productId.productName}</ItemName>
                   <ItemPrice>Rs. {item.productId.productPrice}</ItemPrice>
