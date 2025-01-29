@@ -40,7 +40,13 @@ export const testApi = () => Api.get("/test");
 export const registerUserApi = (data) => Api.post('/api/user/create', data);
 
 // Login API
-export const loginUserApi = (data) => Api.post('/api/user/login', data);
+// export const loginUserApi = (data) => Api.post('/api/user/login', data);
+export const loginUserApi = (data) => {
+  return axios.post("https://localhost:5000/api/user/login", data, {
+    // or your actual endpoint
+    validateStatus: () => true, 
+  });
+};
 
 // Admin dashboard API
 export const adminDashboardApi = (data) => Api.post('/api/user/adminDashboard', data);
@@ -153,5 +159,11 @@ export const getAllContacts = () => Api.get('/api/contact/all', config);
 export const addReviewApi = (data) => Api.post('/api/rating/add', data,config);
 export const getReviewsApi = (productId) => Api.get(`/api/rating/product/${productId}`);
 
+// //khalti
+// export const getKhaltiApi = (data) => Api.post('/initialize_khalti', data, config);
+
 
   
+// Khalti
+export const initializeKhaltiPayment = (data) =>
+  Api.post("/api/payment/initialize_khalti", data);

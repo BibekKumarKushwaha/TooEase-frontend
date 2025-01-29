@@ -30,6 +30,8 @@ import Cart from './pages/myCart/MyCart';
 import Favourites from './pages/favourites/Favourites';
 import OrderList from './pages/order_list/OrderList';
 import ViewContact from './admin/view_contact/ViewContact';
+import PaymentSuccess from './pages/payment/PaymentSuccess';
+import Payment from './pages/payment/Payment';
 
 function App() {
   //const location = useLocation();
@@ -99,6 +101,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/dashboard' element={<Dashboard />} />
+        <Route path="/forgot_password" element={<ForgotPassword />} />
         
         {/* Admin routes */}
         <Route element={<AdminRoutes />}>
@@ -110,21 +113,23 @@ function App() {
         {/* User routes */}
         <Route element={<UserRoutes />}>
           
-          <Route path="/forgot_password" element={<ForgotPassword />} />
+          
           <Route path="/view_product/:id" element={<ViewProduct />}/>
           <Route path='/my_cart' element={<MyCart />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/aboutus' element={<AboutUs />} />
           <Route path='/services' element={<Services />} />
           <Route path='/team' element={<Team />} />
-          
           <Route path='/contact' element={<Contact />} />
           <Route path='/' element={<Dashboard cart={cart} addToCart={addToCart} />} />
           <Route path='/cart' element={<Cart cart={cart} updateQuantity={updateQuantity} removeFromCart={removeFromCart} />} />
           <Route path="/favourites" element={<Favourites />} />
           <Route path="/orderlist" element={<OrderList />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/paymentsuccess" element={<PaymentSuccess />} ></Route>
+
           
-          
+         
           
         </Route>
       </Routes>
