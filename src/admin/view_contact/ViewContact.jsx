@@ -43,7 +43,7 @@ const ViewContact = () => {
                     </tbody>
                 </table>
             </div>
-            <button onClick={() => navigate('/admindashboard')} className="view-back-button">Back to Dashboard</button>
+            <button onClick={() => navigate('/admin/dashboard')} className="view-back-button">Back to Dashboard</button>
             <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={true} closeOnClick pauseOnFocusLoss draggable pauseOnHover />
         </div>
     );
