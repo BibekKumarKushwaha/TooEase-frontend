@@ -322,7 +322,7 @@ const Login = () => {
 
           // Redirect
           if (res.data.userData.isAdmin) {
-            window.location.href = "/admindashboard";
+            window.location.href = "/admin/dashboard";
           } else {
             window.location.href = "/dashboard";
           }
