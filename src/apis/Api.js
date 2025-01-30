@@ -51,6 +51,12 @@ export const loginUserApi = (data) => {
 // Admin dashboard API
 export const adminDashboardApi = (data) => Api.post('/api/user/adminDashboard', data);
 
+// Add the following function to fetch all users
+export const getAllUsersApi = () => Api.get('/api/user/all', getConfig());
+
+// New logout API function
+export const logoutUserApi = () => Api.post('/api/user/logout', null, getConfig());
+
 // Create product API
 export const createProductApi = (data) => Api.post('/api/product/create', data);
 
