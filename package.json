@@ -9,6 +9,7 @@
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.3",
+    "dompurify": "^3.2.3",
     "framer-motion": "^11.3.21",
     "https": "^1.0.0",
     "jsonwebtoken": "^9.0.2",
