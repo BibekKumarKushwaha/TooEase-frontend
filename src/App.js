@@ -32,6 +32,7 @@ import OrderList from './pages/order_list/OrderList';
 import ViewContact from './admin/view_contact/ViewContact';
 import PaymentSuccess from './pages/payment/PaymentSuccess';
 import Payment from './pages/payment/Payment';
+import Users from './admin/users/Users';
 
 function App() {
   //const location = useLocation();
@@ -105,9 +106,10 @@ function App() {
         
         {/* Admin routes */}
         <Route element={<AdminRoutes />}>
-          <Route path='/admindashboard' element={<AdminDashboard />} />
+          <Route path='/admin/dashboard' element={<AdminDashboard />} />
           <Route path='/admin/update/:id' element={<UpdateProducts />} />
-          <Route path="/contactus" element={<ViewContact />} />
+          <Route path="/admin/contactus" element={<ViewContact />} />
+          <Route path="/admin/users" element={<Users />} />
           
         </Route>
         {/* User routes */}
