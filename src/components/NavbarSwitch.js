@@ -5,7 +5,7 @@ import AdminNavbar from '../components/AdminNavbar';
 
 const NavbarSwitch = () => {
   const location = useLocation();
-  const isAdminRoute = location.pathname.startsWith('/admindashboard');
+  const isAdminRoute = location.pathname.startsWith('/admin');
   
   return isAdminRoute ? <AdminNavbar /> : <Navbar />;
 };
