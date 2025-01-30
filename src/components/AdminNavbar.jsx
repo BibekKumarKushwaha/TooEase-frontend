@@ -1,17 +1,24 @@
+
+
 import React, { useState, useEffect } from 'react';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './AdminNavbar.css'; // Use the same CSS
 
 const AdminNavbar = () => {
   const user = JSON.parse(localStorage.getItem('user'));
   const navigate = useNavigate();
   const [welcomeMessage, setWelcomeMessage] = useState('');
+
   useEffect(() => {
     if (user) {
       // Fetch additional data if needed
       const fetchUserData = async () => {
         try {
-          const response = await fetch(`https://localhost:3000/user/${user._id}`);
+          const response = await fetch(`https://localhost:3000/user/${user._id}`, {
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+          });
           if (!response.ok) throw new Error('Network response was not ok');
           const data = await response.json();
           setWelcomeMessage(`Welcome back, ${data.firstName}!`);
@@ -25,10 +32,11 @@ const AdminNavbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('user');
+    localStorage.removeItem('token'); // Ensure to remove token as well
     navigate('/login');
   };
 
-   return (
+  return (
     <div className="navbar-container">
       <nav className="navbar">
         <div className="navbar-left">
@@ -39,9 +47,9 @@ const AdminNavbar = () => {
             </span>
           </Link>
           <div className="navbar-links-left">
-            {/* <Link className="nav-link" to="/">Home</Link> */}
-            <Link className="nav-link" to="/admindashboard">Dashboard</Link>
-            {user && <Link className="nav-link" to="/contactus">contact us</Link>}
+            <Link className="nav-link" to="/admin/dashboard">Dashboard</Link>
+            <Link className="nav-link" to="/admin/users">Users</Link> {/* Added Users Link */}
+            {user && <Link className="nav-link" to="/admin/contactus">Contact Us</Link>}
           </div>
         </div>
         <div className="navbar-links-right">
@@ -53,10 +61,6 @@ const AdminNavbar = () => {
                 <div className="welcome-message">{welcomeMessage}</div>
               </button>
               <div className="dropdown-menu">
-               
-                {/* <Link to='/my_cart' className="dropdown-item">
-                  <i className='fas fa-shopping-cart mr-2'></i> My orders
-                </Link> */}
                 <button onClick={handleLogout} className="dropdown-item">
                   <i className="fas fa-sign-out-alt mr-2"></i> Logout
                 </button>
@@ -70,13 +74,15 @@ const AdminNavbar = () => {
               <Link to="/register" className="nav-link">
                 <i className="fas fa-user-plus mr-2"></i> Register
               </Link>
-              
             </>
           )}
         </div>
       </nav>
     </div>
   );
- };
+};
 
 export default AdminNavbar;
+
+
+
