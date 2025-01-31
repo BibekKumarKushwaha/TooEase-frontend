@@ -36,6 +36,9 @@ const config = {
 // Test API
 export const testApi = () => Api.get("/test");
 
+export const verifyEmailApi = (data) =>
+  Api.put(`/api/user/verifyEmail/${data.token}`);
+
 // Register API
 export const registerUserApi = (data) => Api.post('/api/user/create', data);
 
