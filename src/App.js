@@ -33,6 +33,7 @@ import ViewContact from './admin/view_contact/ViewContact';
 import PaymentSuccess from './pages/payment/PaymentSuccess';
 import Payment from './pages/payment/Payment';
 import Users from './admin/users/Users';
+import VerifyEmail from './pages/verify email/verifyEmail';
 
 function App() {
   //const location = useLocation();
@@ -103,6 +104,7 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path="/forgot_password" element={<ForgotPassword />} />
+        <Route path='/verify-email/:token' element={<VerifyEmail />} />
         
         {/* Admin routes */}
         <Route element={<AdminRoutes />}>
