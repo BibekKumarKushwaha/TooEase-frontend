@@ -4,7 +4,8 @@
 
 // const Navbar = () => {
 //   const navigate = useNavigate();
-//   const user = JSON.parse(localStorage.getItem('user'));
+//   // const user = JSON.parse(localStorage.getItem('user'));
+//   const user =JSON.parse(localStorage.getItem('user'));
 //   const [welcomeMessage, setWelcomeMessage] = useState('');
 
 //   useEffect(() => {
@@ -96,7 +97,7 @@ import './Navbar.css';
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('user'))
   const token = localStorage.getItem('token'); // Get token from localStorage
   const [welcomeMessage, setWelcomeMessage] = useState('');
 
@@ -162,7 +163,7 @@ const Navbar = () => {
             {user && <Link className="nav-link" to="/profile">Profile</Link>}
           </div>
         </div>
-        <div className="navbar-links-right">
+        <div className="navbar-links-right"> 
           {user ? (
             <div className="nav-item dropdown">
               <button className="nav-link dropdown-toggle">
